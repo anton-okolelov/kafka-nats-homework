@@ -1,0 +1,30 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - nats-network
+
+  nats:
+    image: nats:latest
+    ports:
+      - "4222:4222"  # Client connections
+    volumes:
+      - nats-data:/data
+    restart: unless-stopped
+
+    command:
+      - "--jetstream"
+      - "--store_dir=/data"
+    networks:
+      - nats-network
+
+
+networks:
+  nats-network:
+    driver: bridge
+
+volumes:
+  nats-data:
+    driver: local
