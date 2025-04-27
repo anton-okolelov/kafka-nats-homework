@@ -5,6 +5,8 @@ services:
       dockerfile: Dockerfile
     networks:
       - nats-network
+    depends_on:
+      - nats
 
   nats:
     image: nats:latest

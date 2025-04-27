@@ -1,4 +1,6 @@
 ----
+Запускаем nats, билдим go
+
 ```bash
 docker compose up --build -d
 ```
@@ -8,7 +10,7 @@ docker compose up --build -d
 docker compose run app /app/producer
 ```
 
- Запускаем консюмер
+Запускаем консюмер
 ```bash
-docker compose run app /app/consumer
+docker compose run  app /app/consumer
 ```
