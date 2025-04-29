@@ -68,4 +68,3 @@ docker compose stop broker2
 ```bash
 docker compose stop broker1
 ```
-
