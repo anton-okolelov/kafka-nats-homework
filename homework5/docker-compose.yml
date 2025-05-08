@@ -1,0 +1,60 @@
+services:
+  pub:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - nats-network
+    depends_on:
+      - nats
+    entrypoint: /app/pub
+
+  sub:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - nats-network
+    depends_on:
+      - nats
+    entrypoint: /app/sub
+
+  request:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - nats-network
+    depends_on:
+      - nats
+      - reply
+    entrypoint: /app/request
+
+  reply:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - nats-network
+    depends_on:
+      - nats
+    entrypoint: /app/reply
+  nats:
+    image: nats:latest
+    ports:
+      - "4222:4222"  # Client connections
+    volumes:
+      - nats-data:/data
+    restart: unless-stopped
+
+    networks:
+      - nats-network
+
+
+networks:
+  nats-network:
+    driver: bridge
+
+volumes:
+  nats-data:
+    driver: local
