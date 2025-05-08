@@ -32,3 +32,6 @@ request-1  | Producer 21 received reply: Otvet
 request-1  | Producer Id: 21, request: 5
 request-1  | Producer 21 received reply: Otvet
 ```
+
+
+консюмер группу и стриминг я пробовал в homework1
